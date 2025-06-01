@@ -9,8 +9,6 @@ function App({ otpLength = 6 }) {
   }, []);
 
   const handleOnChange = (value, index) => {
-    console.log(value, index);
-
     if (!/^\d*$/.test(value)) return; // does not accept non numeric values
 
     const newArr = [...otpArr];
@@ -22,8 +20,6 @@ function App({ otpLength = 6 }) {
   };
 
   const handleOnKeyUp = (e, index) => {
-    console.log(e);
-
     if (!e.target.value && e.code === "Backspace") {
       inputsRef.current[index - 1]?.focus();
     } else if (e.code === "ArrowRight") {
