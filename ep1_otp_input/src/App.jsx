@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
-const OTP_LEN = 6;
-function App() {
-  const [otpArr, setOtpArr] = useState(new Array(OTP_LEN).fill(""));
+function App({ otpLength = 6 }) {
+  const [otpArr, setOtpArr] = useState(new Array(otpLength).fill(""));
   const inputsRef = useRef([]);
 
   useEffect(() => {
@@ -11,6 +10,7 @@ function App() {
 
   const handleOnChange = (value, index) => {
     console.log(value, index);
+
     if (!/^\d*$/.test(value)) return; // does not accept non numeric values
 
     const newArr = [...otpArr];
@@ -19,6 +19,18 @@ function App() {
     setOtpArr(newArr);
 
     value && inputsRef.current[index + 1]?.focus();
+  };
+
+  const handleOnKeyUp = (e, index) => {
+    console.log(e);
+
+    if (!e.target.value && e.code === "Backspace") {
+      inputsRef.current[index - 1]?.focus();
+    } else if (e.code === "ArrowRight") {
+      inputsRef.current[index + 1]?.focus();
+    } else if (e.code === "ArrowLeft") {
+      inputsRef.current[index - 1]?.focus();
+    }
   };
 
   return (
@@ -34,6 +46,7 @@ function App() {
             value={digit}
             onChange={(e) => handleOnChange(e.target.value, index)}
             ref={(element) => (inputsRef.current[index] = element)}
+            onKeyUp={(e) => handleOnKeyUp(e, index)}
           />
         );
       })}
