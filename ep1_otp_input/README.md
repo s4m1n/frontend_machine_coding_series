@@ -1,12 +1,21 @@
-# React + Vite
+# **OTP INPUT (Frontend Machine Coding)**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## **Description**
 
-Currently, two official plugins are available:
+Create an OTP (One-Time Password) input component using React. The OTP should be entered one digit per input box. The focus should auto-move as the user types or deletes, and the component should support pasting a full OTP. It should also reject any non-numeric characters.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## **Constraints & Edge Cases**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Only numeric input is allowed.**
+- If a box is empty and the backspace key is pressed, move the focus to the **previous box**.
+
+---
+
+## **Requirements**
+
+- Create a component that renders `n` **input boxes**, each accepting **only one numeric digit**.
+- **Automatically move focus to the next input** when a digit is entered.
+- **Automatically move the focus to the previous input** when the **Backspace key** is pressed on an empty field.
+- **Disallow any non-numeric input**.
