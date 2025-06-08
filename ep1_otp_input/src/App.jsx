@@ -29,6 +29,23 @@ function App({ otpLength = 6 }) {
     }
   };
 
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pasteData = e.clipboardData
+      .getData("text")
+      .replace(/\D/g, "")
+      .slice(0, otpLength);
+    if (!pasteData) return;
+
+    const newOtp = [...otpArr];
+    for (let i = 0; i < pasteData.length; i++) {
+      newOtp[i] = pasteData[i];
+    }
+    setOtpArr(newOtp);
+
+    inputsRef.current[pasteData.length - 1]?.focus();
+  };
+
   return (
     <div className="App">
       <h1>OTP Input</h1>
@@ -43,6 +60,7 @@ function App({ otpLength = 6 }) {
             onChange={(e) => handleOnChange(e.target.value, index)}
             ref={(element) => (inputsRef.current[index] = element)}
             onKeyUp={(e) => handleOnKeyUp(e, index)}
+            onPaste={(e) => handlePaste(e, index)}
           />
         );
       })}
